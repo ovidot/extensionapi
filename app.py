@@ -60,14 +60,13 @@ def update_video(video_id):
 # Endpoint to get video data
 
 
-@@app.route('/get_video/<int:video_id>', methods=['GET'])
+@app.route('/get_video/<int:video_id>', methods=['GET'])
 def get_video(video_id):
     video = Video.query.get(video_id)
     if video:
         return jsonify({'file_path': video.file_path})
     else:
         return jsonify({'error': 'Video not found.'}), 404
-
 
 
 if __name__ == '__main__':
