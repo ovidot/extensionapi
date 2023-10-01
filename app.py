@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_cors import CORS
@@ -65,7 +65,7 @@ def get_video(video_id):
     file_path = f'videos/{video_id}.mp4'
 
     if os.path.isfile(file_path):
-        return jsonify({'file_path': file_path})
+        return send_file(file_path, as_attachment=False)
     else:
         return jsonify({'error': 'Video not found.'}), 404
 
