@@ -62,9 +62,10 @@ def update_video(video_id):
 
 @app.route('/get_video/<int:video_id>', methods=['GET'])
 def get_video(video_id):
-    video = Video.query.get(video_id)
-    if video:
-        return jsonify({'file_path': video.file_path})
+    file_path = f'videos/{video_id}.mp4'
+
+    if os.path.isfile(file_path):
+        return jsonify({'file_path': file_path})
     else:
         return jsonify({'error': 'Video not found.'}), 404
 
